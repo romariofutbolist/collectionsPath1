@@ -33,11 +33,5 @@ public class EmployeeController {
     public Employee findPerson(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname) {
         return employeeService.findEmployee(firstname, lastname);
     }
-
-    @GetMapping
-    public List<Employee> getAll() {
-        return employeeService.getAll();
-    }
-
 }
 

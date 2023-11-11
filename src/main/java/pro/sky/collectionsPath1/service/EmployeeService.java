@@ -46,8 +46,4 @@ public class EmployeeService {
         }
         return result;
     }
-
-    public List<Employee>getAll() {
-        return employees;
-    }
 }
