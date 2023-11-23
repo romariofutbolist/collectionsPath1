@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class EmployeeService {
     private final HashMap<String, Employee> employees = new HashMap<>();
-    public static final int maxEmployees = 2;
+    public static final int maxEmployees = 3;
 
     public Employee addEmployee(String firstname, String lastname) {
         if (employees.size() > maxEmployees) {
