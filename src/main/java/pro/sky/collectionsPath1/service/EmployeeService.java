@@ -5,45 +5,51 @@ import pro.sky.collectionsPath1.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.collectionsPath1.exceptions.EmployeeNotFoundException;
 import pro.sky.collectionsPath1.exceptions.EmployeeStorageIsFullException;
 import pro.sky.collectionsPath1.model.Employee;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 @Service
 public class EmployeeService {
-    private final List<Employee>employees = new ArrayList<>(List.of());
+    private final HashMap<String, Employee> employees = new HashMap<>();
     public static final int maxEmployees = 2;
 
     public Employee addEmployee(String firstname, String lastname) {
-        if(employees.size()>maxEmployees) {
+        if (employees.size() > maxEmployees) {
             throw new EmployeeStorageIsFullException("Лимит сотрудников превышен");
         }
-        Employee addedEmployee = new Employee(firstname, lastname);
-        if(employees.contains(addedEmployee)) {
+
+        String key = getKey(firstname, lastname);
+        if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник уже есть");
         }
-        employees.add(addedEmployee);
+
+        Employee addedEmployee = new Employee(firstname, lastname);
+
+        employees.put(key, addedEmployee);
         return addedEmployee;
     }
 
-    public Employee removeEmployee (String firstname, String lastname) {
+    public Employee removeEmployee(String firstname, String lastname) {
         Employee removedEmployee = new Employee(firstname, lastname);
-        if(!employees.contains(removedEmployee)) {
+        String key = getKey(firstname, lastname);
+        if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException("Такой сотрудник не найден");
         }
-        employees.remove(removedEmployee);
+        employees.remove(key, removedEmployee);
         return removedEmployee;
     }
 
-    public Employee findEmployee (String firstname, String lastname) {
-        Employee findedEmployee = new Employee(firstname, lastname);
-        if(!employees.contains(findedEmployee)) {
+    public Employee findEmployee(String firstname, String lastname) {
+        String key = getKey(firstname, lastname);
+        if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException("Такой сотрудник не найден");
         }
-        Employee result = null;
-        for (Employee employee : employees) {
-            if(employee.equals(findedEmployee)) {
-                return findedEmployee;
-            }
-        }
-        return result;
+        return employees.get(key);
+    }
+
+    private String getKey(String firstname, String lastname) {
+        return firstname + lastname;
     }
 }
