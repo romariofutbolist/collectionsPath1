@@ -34,5 +34,10 @@ public class EmployeeController {
     public Employee findPerson(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("department") Integer department, @RequestParam("salary") double salary) {
         return employeeService.findEmployee(firstname, lastname, department, salary);
     }
+
+    @GetMapping
+    public List<Employee> getAll() {
+        return employeeService.getAll();
+    }
 }
 
