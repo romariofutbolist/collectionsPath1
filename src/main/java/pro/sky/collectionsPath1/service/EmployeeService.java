@@ -12,11 +12,11 @@ public class EmployeeService {
     private final List<Employee>employees = new ArrayList<>(List.of());
     public static final int maxEmployees = 2;
 
-    public Employee addEmployee(String firstname, String lastname) {
+    public Employee addEmployee(String firstname, String lastname, int department, double salary) {
         if(employees.size()>maxEmployees) {
             throw new EmployeeStorageIsFullException("Лимит сотрудников превышен");
         }
-        Employee addedEmployee = new Employee(firstname, lastname);
+        Employee addedEmployee = new Employee(firstname, lastname, department, salary);
         if(employees.contains(addedEmployee)) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник уже есть");
         }
@@ -24,8 +24,8 @@ public class EmployeeService {
         return addedEmployee;
     }
 
-    public Employee removeEmployee (String firstname, String lastname) {
-        Employee removedEmployee = new Employee(firstname, lastname);
+    public Employee removeEmployee (String firstname, String lastname, int department, double salary) {
+        Employee removedEmployee = new Employee(firstname, lastname, department, salary);
         if(!employees.contains(removedEmployee)) {
             throw new EmployeeNotFoundException("Такой сотрудник не найден");
         }
@@ -33,8 +33,8 @@ public class EmployeeService {
         return removedEmployee;
     }
 
-    public Employee findEmployee (String firstname, String lastname) {
-        Employee findedEmployee = new Employee(firstname, lastname);
+    public Employee findEmployee (String firstname, String lastname, int department, double salary) {
+        Employee findedEmployee = new Employee(firstname, lastname, department, salary);
         if(!employees.contains(findedEmployee)) {
             throw new EmployeeNotFoundException("Такой сотрудник не найден");
         }
