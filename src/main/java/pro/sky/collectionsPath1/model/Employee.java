@@ -1,7 +1,6 @@
 package pro.sky.collectionsPath1.model;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class Employee {
     private final String firstname;
@@ -15,14 +14,6 @@ public class Employee {
         this.lastname = lastname;
         this.department = department;
         this.salary = salary;
-    }
-
-    public Employee(String firstname, String lastname, Integer department) {
-        Random random = new Random();
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.department = random.nextInt(5) + 1;
-        this.salary = random.nextInt(1000) + 1000;
     }
 
     public String getFirstname() {
