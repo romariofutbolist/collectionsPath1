@@ -1,5 +1,7 @@
 package pro.sky.collectionsPath1.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
@@ -10,10 +12,14 @@ public class Employee {
 
 
     public Employee(String firstname, String lastname, int department, double salary) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstname = validateNames(firstname);
+        this.lastname = validateNames(lastname);
         this.department = department;
         this.salary = salary;
+    }
+
+    private String validateNames(String strings) {
+        return StringUtils.capitalize(strings.toLowerCase());
     }
 
     public String getFirstname() {
