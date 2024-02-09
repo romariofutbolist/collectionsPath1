@@ -10,22 +10,23 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @ExceptionHandler(RuntimeException.class)
-    public String handlerException(RuntimeException e) {
-        return e.getMessage();
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public String handlerException(RuntimeException e) {
+//        return e.getMessage();
+//    }
+
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public Employee getPerson(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("department") Integer department, @RequestParam("salary") double salary) {
         return employeeService.addEmployee(firstname, lastname, department, salary);
     }
 
-    @GetMapping("/remove")
+    @DeleteMapping("/remove")
     public Employee removePerson(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("department") Integer department, @RequestParam("salary") double salary) {
         return employeeService.removeEmployee(firstname, lastname, department, salary);
     }
@@ -39,5 +40,7 @@ public class EmployeeController {
     public List<Employee> getAll() {
         return employeeService.getAll();
     }
+
+
 }
 
