@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.collectionsPath1.model.Employee;
 import pro.sky.collectionsPath1.service.EmployeeService;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -37,7 +39,7 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> getAll() {
+    public Collection<Employee> getAll() {
         return employeeService.getAll();
     }
 
